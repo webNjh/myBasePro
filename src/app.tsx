@@ -1,12 +1,14 @@
-// import React from 'react';
+import React from 'react';
 import type { FC } from 'react';
-import { Button } from 'antd';
+import {
+  RouterProvider,
+} from "react-router-dom";
+import router from './route/index';
 
 const App: FC = () => {
+
   return (
-    <div>
-      <Button>aaaa</Button>
-    </div>
+    <RouterProvider router={router} />
   );
 }
 

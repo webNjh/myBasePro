@@ -16,6 +16,7 @@ const config = {
   entry: resolve("./src/index.tsx"),
   output: {
     path: resolve("./dist"),
+    // publicPath: './dist',
     filename: 'index.js',
   },
   devServer: {
@@ -23,6 +24,9 @@ const config = {
     hot: true,
     open: true,
     host: "localhost",
+    // historyApiFallback: {
+    //   index: './dist/index.html',
+    // },
   },
   plugins: [
     new HtmlWebpackPlugin({
