@@ -1,32 +1,23 @@
 import React from 'react';
 import {
   createBrowserRouter,
-  createHashRouter,
   Navigate,
 } from "react-router-dom";
-import MyApp from '../pages/test/MyApp';
-import TestComp from '../pages/test/TestComp';
-import Test from '../pages/test';
-
+import Tensorflow from '../pages/tensorflow';
+import Example1 from '../pages/tensorflow/exampleComponents/Example1';
 
 const router = createBrowserRouter([
   {
-    path: '/test',
-    element: <Test />,
-    children: [
-      {
-        path: "testComp",
-        element: <TestComp />,
-      },
-      {
-        path: "myApp",
-        element: <MyApp />,
-      },
-    ],
+    path: '/',
+    element: <Navigate to="/tensorflow" replace/> // <-- redirect
   },
   {
-    path: '/',
-    element: <Navigate to="/test" /> // <-- redirect
+    path: '/tensorflow',
+    element: <Tensorflow />,
+  },
+  {
+    path: '/example1',
+    element: <Example1 />,
   },
 ])
  
