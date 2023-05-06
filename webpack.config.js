@@ -4,15 +4,26 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const isProduction = process.env.NODE_ENV == "production";
+const isDev = process.env.NODE_ENV == "development";
 
 const stylesHandler = MiniCssExtractPlugin.loader;
+
+const cssLoader = {
+  loader: 'css-loader',
+  options: {
+    modules: {
+      auto: true,
+      localIdentName: '[path][local]_[hash:base64:8]'
+    }
+  }
+}
 
 function resolve(relatedPath) {
   return path.join(__dirname, relatedPath)
 }
 
 const config = {
+  mode: process.env.NODE_ENV,
   entry: resolve("./src/index.tsx"),
   output: {
     path: resolve("./dist"),
@@ -60,11 +71,11 @@ const config = {
       },
       {
         test: /\.less$/i,
-        use: [stylesHandler, "css-loader", "postcss-loader", "less-loader"],
+        use: [stylesHandler, cssLoader, "postcss-loader", "less-loader"],
       },
       {
         test: /\.css$/i,
-        use: [stylesHandler, "css-loader", "postcss-loader"],
+        use: [stylesHandler, cssLoader, "postcss-loader"],
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
@@ -72,13 +83,21 @@ const config = {
       },
     ],
   },
+  performance: {
+    hints: "warning", // 枚举
+    maxAssetSize: 30000000, // 整数类型（以字节为单位）
+    maxEntrypointSize: 50000000, // 整数类型（以字节为单位）
+  },
   resolve: {
-    extensions: [".tsx", ".ts", ".jsx", ".js", "..."],
+    extensions: [".tsx", ".ts", ".jsx", ".js", ".less", ".css", ".json", "..."],
+    alias: {
+      '@': resolve('./src')
+    }
   },
 };
 
 module.exports = () => {
-  if (isProduction) {
+  if (!isDev) {
     config.mode = "production";
   } else {
     config.mode = "development";
