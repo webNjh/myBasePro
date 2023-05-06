@@ -8,6 +8,11 @@
     "jsx": "react",
     "moduleResolution": "Node",
     "esModuleInterop": true, // 允许使用commonJs的方式import默认文件,import React from 'react
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
-  "files": ["src/index.tsx"]
+  "files": ["src/index.tsx"],
+  "include": ["./src"]
 }
