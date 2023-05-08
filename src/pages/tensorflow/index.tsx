@@ -11,7 +11,7 @@ const Tensorflow: FC = () => {
         <h1>Hello Tensorflow</h1>
       </header>
       <nav>
-        <NavLink to="/example1">线性回归</NavLink>
+        <NavLink to="/linearRegression">线性回归</NavLink>
       </nav>
     </div>
   );
