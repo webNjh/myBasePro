@@ -4,7 +4,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import Tensorflow from '../pages/tensorflow';
-import Example1 from '../pages/tensorflow/exampleComponents/Example1';
+import LinearRegression from '../pages/tensorflow/exampleComponents/LinearRegression';
 
 const router = createBrowserRouter([
   {
@@ -16,8 +16,8 @@ const router = createBrowserRouter([
     element: <Tensorflow />,
   },
   {
-    path: '/example1',
-    element: <Example1 />,
+    path: '/linearRegression',
+    element: <LinearRegression />,
   },
 ])
  

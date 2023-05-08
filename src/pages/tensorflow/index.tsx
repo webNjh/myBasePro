@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import * as tf from '@tensorflow/tfjs';
+// import * as tf from '@tensorflow/tfjs';
 import Styles from './index.module.less';
 
-function Tensorflow() {
+const Tensorflow: FC = () => {
   
   return (
     <div className={Styles.tensorflow}>
