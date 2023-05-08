@@ -5,7 +5,7 @@
     "module": "ESNext",     // 代码的模块系统
     "target": "ESNext",     // 编译后目标js版本
     "allowJs": true,
-    "jsx": "react",
+    "jsx": "react-jsx", // 设置成react-jsx,17版本以上不用手动引入React
     "moduleResolution": "Node",
     "esModuleInterop": true, // 允许使用commonJs的方式import默认文件,import React from 'react
     "baseUrl": "./",
