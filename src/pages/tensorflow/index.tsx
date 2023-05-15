@@ -13,6 +13,7 @@ const Tensorflow: FC = () => {
       <nav className={Styles.nav}>
         <NavLink to="/linearRegression">线性回归</NavLink>
         <NavLink to="/normalization">归一化</NavLink>
+        <NavLink to="/logisticRegression">逻辑回归</NavLink>
       </nav>
     </div>
   );

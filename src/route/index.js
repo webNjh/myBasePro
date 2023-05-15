@@ -6,6 +6,7 @@ import {
 import Tensorflow from '../pages/tensorflow';
 import LinearRegression from '../pages/tensorflow/exampleComponents/LinearRegression';
 import Normalization from '../pages/tensorflow/exampleComponents/Normalization';
+import LogisticRegression from '../pages/tensorflow/exampleComponents/LogisticRegression';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: '/normalization',
     element: <Normalization />,
+  },
+  {
+    path: '/logisticRegression',
+    element: <LogisticRegression />,
   },
 ])
  
