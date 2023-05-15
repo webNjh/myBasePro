@@ -10,8 +10,9 @@ const Tensorflow: FC = () => {
       <header>
         <h1>Hello Tensorflow</h1>
       </header>
-      <nav>
+      <nav className={Styles.nav}>
         <NavLink to="/linearRegression">线性回归</NavLink>
+        <NavLink to="/normalization">归一化</NavLink>
       </nav>
     </div>
   );

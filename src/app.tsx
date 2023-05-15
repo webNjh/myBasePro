@@ -1,5 +1,6 @@
-import React from 'react';
+// import React from 'react';
 import type { FC } from 'react';
+import { hot } from 'react-hot-loader/root';
 import {
   RouterProvider,
 } from "react-router-dom";
@@ -12,4 +13,4 @@ const App: FC = () => {
   );
 }
 
-export default App;
+export default hot(App);

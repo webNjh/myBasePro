@@ -1,37 +1,35 @@
 /*
-* 线性回归
+* 归一化
 */
-import { useEffect, FC, useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import * as tfvis from '@tensorflow/tfjs-vis';
 import * as tf from '@tensorflow/tfjs';
 import { InputNumber, Button, Spin } from 'antd';
 import { TensorData } from '../common';
 
-const xs: TensorData = [1, 2, 3, 4];
-const ys: TensorData = [1, 3, 5, 7];
+const heights: TensorData = [150, 160, 170];
+const weights: TensorData = [40, 50, 60];
 
-const LinearRegression: FC = () => {
+function Normalization() {
   const modelRef = useRef<any>(null);
   const [predictionV, setPredictionV] = useState<number>(null);
   const [value, setValue] = useState<string>('');
   const [modelLoading, setModelLoading] = useState<boolean>(false);
-
   // 可视化散点图
   const showScatterPlot = (xs: TensorData, ys: TensorData) => {
 
     tfvis.render.scatterplot(
-      { name: '线性回归训练集' },
+      { name: '身高体重训练集' },
       { values: xs.map((x, i) => ({ x, y: ys[i] })) },
-      { xAxisDomain: [0, 5], yAxisDomain: [0, 8] }
+      { xAxisDomain: [140, 180], yAxisDomain: [30, 70] }
     )
 
   }
 
   const initTensorModel = async () => {
     setModelLoading(true);
-
     // 可视化散点图
-    showScatterPlot(xs, ys);
+    showScatterPlot(heights, weights)
     // 创建一个连续的模型
     const model = tf.sequential();
     // 定义一个全连阶层
@@ -47,10 +45,12 @@ const LinearRegression: FC = () => {
       optimizer: tf.train.sgd(0.1) // 优化器(学习率)
     });
 
-    const inputs = tf.tensor(xs);
-    const labels = tf.tensor(ys);
+    // 归一化
+    const inputs = tf.tensor(heights).sub(150).div(20);
+    const labels = tf.tensor(weights).sub(40).div(20);
+
     await model.fit(inputs, labels, {
-      batchSize: 4, // 一次训练选取多样本数量
+      batchSize: 3, // 一次训练选取多样本数量
       epochs: 100, // 迭代次数
       callbacks: tfvis.show.fitCallbacks(
         { name: '训练过程' },
@@ -68,9 +68,10 @@ const LinearRegression: FC = () => {
 
   const onPrediction = () => {
     if (modelRef.current && value) {
-      // 预测，输出预测值
-      const output: any = modelRef.current.predict(tf.tensor([Number(value)]));
-      const pv: number = (output.dataSync())[0]
+      // 预测，输出预测值,预测值也需要归一化
+      const output: any = modelRef.current.predict(tf.tensor([Number(value)]).sub(150).div(20));
+      // 输出时需要反归一化
+      const pv: number = (output.mul(20).add(40).dataSync())[0]
       setPredictionV(pv);
       alert(`预测值为: ${pv}`);
     } else {
@@ -91,4 +92,4 @@ const LinearRegression: FC = () => {
   );
 }
 
-export default LinearRegression;
+export default Normalization;

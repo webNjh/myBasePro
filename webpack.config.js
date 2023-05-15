@@ -3,7 +3,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin; 
 
 const isDev = process.env.NODE_ENV == "development";
 
@@ -25,7 +26,8 @@ function resolve(relatedPath) {
 
 const config = {
   mode: process.env.NODE_ENV,
-  entry: resolve("./src/index.tsx"),
+  entry: ['react-hot-loader/patch', resolve("./src/index.tsx")],
+  target: ['web', 'es5'],
   output: {
     path: resolve("./dist"),
     // publicPath: './dist',
@@ -40,6 +42,7 @@ const config = {
     //   index: './dist/index.html',
     // },
   },
+  devtool: 'cheap-module-source-map',
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html",
@@ -48,6 +51,9 @@ const config = {
     new MiniCssExtractPlugin(),
 
     new NodePolyfillPlugin(),
+
+    // 开启 BundleAnalyzerPlugin 
+    new BundleAnalyzerPlugin(),
   ],
   module: {
     rules: [
@@ -67,7 +73,9 @@ const config = {
                 ["@babel/plugin-proposal-decorators", { "legacy": true }],
                 // ["import", { libraryName: "antd", "libraryDirectory": "es", style: 'css' }],
                 "@babel/plugin-transform-runtime",
-              ]
+              ],
+              cacheDirectory: true, // 开启babel编译缓存
+              // cacheCompression: false, // 缓存文件不要压缩,减少压缩时间
             }
           },
         ]

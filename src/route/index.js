@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import Tensorflow from '../pages/tensorflow';
 import LinearRegression from '../pages/tensorflow/exampleComponents/LinearRegression';
+import Normalization from '../pages/tensorflow/exampleComponents/Normalization';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: '/linearRegression',
     element: <LinearRegression />,
+  },
+  {
+    path: '/normalization',
+    element: <Normalization />,
   },
 ])
  
