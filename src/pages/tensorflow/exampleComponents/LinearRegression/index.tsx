@@ -32,9 +32,9 @@ const LinearRegression: FC = () => {
 
     // 可视化散点图
     showScatterPlot(xs, ys);
-    // 创建一个连续的模型
+    // 创建一个连续的模型, 既上一层的输出必然是下一层的输入
     const model = tf.sequential();
-    // 定义一个全连阶层
+    // 定义一个全链阶层
     model.add(
       tf.layers.dense({ 
         units: 1, // 输出维度(神经元个数)

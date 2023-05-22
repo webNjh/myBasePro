@@ -4,7 +4,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin; 
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin; 
 
 const isDev = process.env.NODE_ENV == "development";
 
@@ -30,7 +30,7 @@ const config = {
   target: ['web', 'es5'],
   output: {
     path: resolve("./dist"),
-    // publicPath: './dist',
+    publicPath: '/',
     filename: 'index.js',
   },
   devServer: {
@@ -38,9 +38,7 @@ const config = {
     hot: true,
     open: true,
     host: "localhost",
-    // historyApiFallback: {
-    //   index: './dist/index.html',
-    // },
+    historyApiFallback: true,
   },
   devtool: 'cheap-module-source-map',
   plugins: [
@@ -53,7 +51,7 @@ const config = {
     new NodePolyfillPlugin(),
 
     // 开启 BundleAnalyzerPlugin 
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
   ],
   module: {
     rules: [

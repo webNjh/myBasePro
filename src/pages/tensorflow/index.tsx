@@ -14,6 +14,7 @@ const Tensorflow: FC = () => {
         <NavLink to="/linearRegression">线性回归</NavLink>
         <NavLink to="/normalization">归一化</NavLink>
         <NavLink to="/logisticRegression">逻辑回归</NavLink>
+        <NavLink to="/xorRegression">XOR逻辑回归</NavLink>
       </nav>
     </div>
   );
