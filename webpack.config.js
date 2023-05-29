@@ -36,9 +36,7 @@ const config = {
     hot: true,
     open: true,
     host: "localhost",
-    // historyApiFallback: {
-    //   index: './dist/index.html',
-    // },
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
