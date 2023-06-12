@@ -1,0 +1,39 @@
+@keyframes clipDiamondIn {
+  0%{
+    // transform: rotate(0deg);
+    clip-path: polygon(20% 50%, 25% 52.4%, 11.5% 54.5%);
+  }
+  100% {
+    // transform: rotate(180deg);
+    clip-path: polygon(20% 40%, 25% 52.4%, 11.5% 34.5%);
+  }   
+}
+@keyframes colorAni {
+  0% {
+    background-color: #235;
+  }
+  35% {
+    background-color: #235;
+  }
+  45% {
+    background-color: rgb(97, 122, 173);
+  }
+  55% {
+    background-color: #235;
+  }
+  100% {
+    background-color: #235;
+  }
+}
+.clip {
+  width: 400px;
+  height: 400px;
+  background-color: #235;
+  // clip-path: polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%);
+  animation: clipDiamondIn .6s, colorAni 4s linear infinite;
+  animation-fill-mode: forwards;
+  // &:active {
+  //   transform: rotate(720deg);
+  //   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  // }
+}
