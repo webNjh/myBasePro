@@ -1,3 +1,14 @@
+@w: 10px;
+
+@keyframes identifier {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg) scale3D(0.3, 0.3, 0.3);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(360deg) scale3D(0.3, 0.3, 0.3);
+  }
+}
+
 .boxContainer {
   position: relative;
   perspective: none;
@@ -7,7 +18,7 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  transform: rotateX(30deg) rotateY(15deg);
+  animation: identifier 20s linear infinite;
   .face {
     position: absolute;
     display: inline-block;
