@@ -4,6 +4,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
+const pkg = require('./package.json');
 
 const isDev = process.env.NODE_ENV == "development";
 
@@ -43,7 +44,11 @@ const config = {
       template: "./public/index.html",
     }),
 
-    new MiniCssExtractPlugin(),
+    ...(isDev ? [] : [
+      new MiniCssExtractPlugin({
+        filename: 'css/[name].[chunkhash:8].css'
+      })
+    ]),
 
     new NodePolyfillPlugin(),
   ],
@@ -72,14 +77,14 @@ const config = {
       },
       {
         test: /\.less$/i,
-        use: [stylesHandler, cssLoader, "postcss-loader", "less-loader"],
+        use: [isDev ? 'style-loader' : stylesHandler, cssLoader, "postcss-loader", "less-loader"],
       },
       {
         test: /\.css$/i,
-        use: [stylesHandler, cssLoader, "postcss-loader"],
+        use: [isDev ? 'style-loader' : stylesHandler, cssLoader, "postcss-loader"],
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
         type: "asset",
       },
     ],
@@ -90,7 +95,7 @@ const config = {
     maxEntrypointSize: 50000000, // 整数类型（以字节为单位）
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".jsx", ".js", ".less", ".css", ".json", "..."],
+    extensions: [".tsx", ".ts", ".jsx", ".js", ".less", ".css", ".json"],
     alias: {
       '@': resolve('./src')
     }

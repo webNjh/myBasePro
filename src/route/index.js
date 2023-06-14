@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import NavBar from '../pages/NavBar';
 import Box from '@/pages/Components/Box';
+import Logo from '@/pages/Components/Logo';
 
 
 const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: '/3DBox',
     element: <Box />,
+  },
+  {
+    path: '/logo',
+    element: <Logo />,
   },
 ])
  
