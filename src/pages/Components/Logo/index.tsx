@@ -42,8 +42,8 @@ const points = [
   '41.68% 61.68%, 42.74% 60.02%, 43.34% 61.68%', // 35
   '41.68% 61.68%, 43.34% 61.68%, 42.97% 62.75%', // 36
   '42.11% 64.4%, 42.97% 62.75%, 44.58% 63.16%', // 37
-  '42.11% 64.4%, 44.58% 63.16%, 44.11% 68.24%', // 38
-  '44.34% 65.73%, 44.58% 63.16%, 45.68% 66.41%', // 39
+  '42.11% 64.4%, 44.58% 63.16%, 44.11% 65.61%', // 38
+  '44.11% 65.61%, 44.58% 63.16%, 45.68% 66.41%', // 39
   '45.68% 66.41%, 48.63% 66.98%, 47.38% 68.01%', // 40
   '44.58% 63.16%, 46.61% 62.88%, 45.68% 66.41%', // 41
   '46.61% 62.88%, 47.61% 65.08%, 45.68% 66.41%', // 42
@@ -143,14 +143,39 @@ const points = [
   '52.90% 32.88%, 54.53% 31.48%, 53.84% 33.38%', // 136
   '54.03% 36.81%, 55.48% 34.73%, 55.03% 36.81%', // 137
   '57.49% 43.13%, 57.49% 41.33%, 58.95% 44.12%', // 138
+  '52.78% 31.92%, 54.53% 31.48%, 52.90% 32.88%', // 139
+  '54.53% 31.48%, 55.04% 32.55%, 53.84% 33.38%', // 140
+  '55.04% 32.55%, 55.48% 34.73%, 54.16% 34.73%', // 141
+  '55.03% 36.81%, 55.48% 34.73%, 56.02% 37.42%', // 142
+  '54.53% 31.48%, 55.42% 31.6%, 55.04% 32.55%', // 143
+  '58.95% 44.12%, 60.41% 42.92%, 60.15% 45.38%', // 144
+  '58.95% 44.12%, 59.27% 39.77%, 60.41% 40.22%', // 145
+  '55.04% 32.55%, 55.42% 31.6%, 56.72% 32.27%', // 146
+  '55.48% 34.73%, 56.72% 32.27%, 57.93% 33.48%', // 147
+  '55.48% 34.73%, 57.94% 36.63%, 56.02% 37.42%', // 148
+  '56.02% 37.42%, 57.94% 36.63%, 56.91% 38.97%', // 149
+  '56.91% 38.97%, 59.27% 39.77%, 57.49% 41.33%', // 150
+  '55.04% 32.55%, 56.72% 32.27%, 55.48% 34.73%', // 151
+  '58.95% 44.12%, 60.41% 40.22%, 60.41% 42.92%', // 152
+  '57.49% 41.33%, 59.27% 39.77%, 58.95% 44.12%', // 153
+  '55.48% 34.73%, 57.93% 33.48%, 57.94% 36.63%', // 154
+  '59.27% 39.77%, 59.9% 37.73%, 60.41% 40.22%', // 155
+  '56.91% 38.97%, 57.94% 36.63%, 59.27% 39.77%', // 156
+  '57.93% 33.48%, 58.95% 35.08%, 57.94% 36.63%', // 157
+  '57.94% 36.63%, 58.95% 35.08%, 59.27% 39.77%', // 158
+  '58.95% 35.08%, 59.9% 37.73%, 59.27% 39.77%', // 159
 ];
 
 const greenIndex = [
   89, 92, 93, 96, 97, 100, 101, 104, 105, 107, 110, 111, 112, 113, 114, 115, 119, 120, 121, 124, 126, 127,
-  128, 129, 132, 133, 134, 135, 137, 138
+  128, 129, 132, 133, 134, 135, 137, 138, 141, 142, 144, 145, 147, 148, 149, 150, 151, 152, 153, 154, 155,
+  156, 157, 158, 159
 ];
 
 const triangles = points.map((d, i) => {
+  if (!d) {
+    return {}
+  }
   if (greenIndex.includes(i)) {
     return {
       clipPath: `polygon(${d})`,
@@ -164,6 +189,9 @@ const triangles = points.map((d, i) => {
 function Logo() {
   const circle = useMemo(() => {
     const a = points.map((d) => {
+      if (!d) {
+        return null;
+      }
       const totalPoint: any = [];
       const pointArr = d.split(', ');
       pointArr.forEach((v) => {
@@ -173,34 +201,68 @@ function Logo() {
       return totalPoint;
     })
     
-    // let vs: any = [];
+    // 三角形中心点坐标
+    const centerPoint: any = [];
+    a.forEach(d => {
+      if (d) {
+        const x = (parseFloat(d[0][0]) + parseFloat(d[1][0]) + parseFloat(d[2][0])) / 3;
+        const y = (parseFloat(d[0][1]) + parseFloat(d[1][1]) + parseFloat(d[2][1])) / 3;
+        centerPoint.push({ x, y });
+      } else {
+        centerPoint.push(null);
+      }
+    })
+    // return centerPoint;
+    
+    // 三角形顶点坐标平铺
     const vs = new Map();
     a.forEach(d => {
-      d.forEach((v: any) => {
-        if (!vs.get(v.join(','))) {
-          vs.set(v.join(','), v)
-        }
-      })
+      if (d) {
+        d.forEach((v: any) => {
+          if (!vs.get(v.join(','))) {
+            vs.set(v.join(','), v)
+          }
+        })
+      }
     })
     
-    return Array.from(vs.values());
+    return { vertexPoints: Array.from(vs.values()), centerPoints: centerPoint };
   }, [])
 
   return (
     <div className={styles.logo}>
-      <div className={styles.logo_bg}></div>
+      {/* <div className={styles.logo_bg}></div> */}
       {
         triangles.map((d, i) => (
           <div 
-            key={`${d.clipPath + i}`} 
-            className={classnames(styles.logo_triangle, styles[`logo_triangle_${i}`])} 
+            key={`${d?.clipPath + i}`} 
+            className={classnames(styles.logo_triangle, styles[`logo_triangle-${i + 1}`])} 
             style={d}
           />
         ))
       }
       <svg style={{ width: 1920, height: 1080, position: 'absolute' }}>
-        {
-          circle.map((d: any, i: number) => {
+        {/* 三角形中心点 */}
+        {/* {
+          circle.centerPoints.map((d: any, i: number) => {
+            if (d) {
+              return (
+                <text 
+                  key={`${d + i}`}
+                  x={d.x / 100 * 1920}
+                  y={d.y / 100 * 1080}
+                  fill="white"
+                  fontSize="2"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                >{i}</text>
+              )
+            } return null;
+          })
+        } */}
+        {/* 三角形顶点 */}
+        {/* {
+          circle.vertexPoints.map((d: any, i: number) => {
             return (
               <circle 
                 key={`${d + i}`} 
@@ -215,7 +277,7 @@ function Logo() {
               />
             )
           })
-        }
+        } */}
       </svg>
     </div>
   );

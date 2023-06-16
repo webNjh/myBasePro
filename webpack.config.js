@@ -15,7 +15,7 @@ const cssLoader = {
   options: {
     modules: {
       auto: true,
-      localIdentName: '[path][local]_[hash:base64:8]'
+      localIdentName: '[local]'
     }
   }
 }
