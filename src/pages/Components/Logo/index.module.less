@@ -31,7 +31,7 @@
   }
   .logo_triangle {
     .baseLogoTriangle;
-    background-color: @initColor;
+    background-color: @initColorBlue;
     transition: all .3s ease-in-out;
     // animation: identifier 5s ease-in-out;
     // animation-fill-mode: forwards;
@@ -62,10 +62,32 @@
       }
     });
 
+    @transformDelay: (@i * 0.01s) + 5;
+    @transform: ~"transform@{i}";
+
+
+    .keyframesFunction(@transform, {
+      0% {
+        background-color: @currentColor;
+      }
+      45% {
+        background-color: @currentColor;
+      }
+      50% {
+        background-color: lighten(@currentColor, 40%);
+      }
+      55% {
+        background-color: @currentColor;
+      }
+      100% {
+        background-color: @currentColor;
+      }
+    });
+
     @middle: ~"middle@{i}";
 
     .logo_triangle-@{i} {
-      animation: @start 5s ease-in-out @delay;
+      animation: @start 3s ease-in-out @delay, @transform 10s ease @transformDelay infinite;
       animation-fill-mode: forwards;
     }
 
