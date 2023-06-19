@@ -1,0 +1,509 @@
+@initColor: #00B4ED;
+@initColor2: #67B42B;
+@initHighColor: #a3ebff;
+@initHighColor2: #d9ffbc;
+
+@color1: #0094D5;
+@color2: #009FE8;
+@color3: #00BDFF;
+@color4: #00B4ED;
+@color5: #0089B8;
+@color6: #00A2DA;
+@color7: #00B0E8;
+@color8: #5BA617;
+@color9: #74C62A;
+@color10: #06631D;
+@color11: #087E25;
+@color12: #129528;
+@color13: #3A9B29;
+
+@triangleColorList: 
+  @color1, // 0
+  @color2, // 1
+  @color2, // 2
+  @color1, // 3
+  @color3, // 4
+  @color4, // 5
+  @color1, // 6
+  @color4, // 7
+  @color4, // 8
+  @color3, // 9
+  @color3, // 10
+  @color2, // 11
+  @color2, // 12
+  @color3, // 13
+  @color2, // 14
+  @color1, // 15
+  @color2, // 16
+  @color4, // 17
+  @color1, // 18
+  @color1, // 19
+  @color3, // 20
+  @color4, // 21
+  @color4, // 22
+  @color1, // 23
+  @color3, // 24
+  @color2, // 25
+  @color4, // 26
+  @color1, // 27
+  @color5, // 28
+  @color6, // 29
+  @color7, // 30
+  @color5, // 31
+  @color7, // 32
+  @color6, // 33
+  @color7, // 34
+  @color5, // 35
+  @color7, // 36
+  @color2, // 37
+  @color4, // 38
+  @color3, // 39
+  @color2, // 40
+  @color1, // 41
+  @color4, // 42
+  @color3, // 43
+  @color6, // 44
+  @color5, // 45
+  @color5, // 46
+  @color3, // 47
+  @color4, // 48
+  @color1, // 49
+  @color2, // 50
+  @color6, // 51
+  @color5, // 52
+  @color7, // 53
+  @color5, // 54
+  @color6, // 55
+  @color1, // 56
+  @color6, // 57
+  @color5, // 58
+  @color5, // 59
+  @color2, // 60
+  @color1, // 61
+  @color6, // 62
+  @color6, // 63
+  @color5, // 64
+  @color4, // 65
+  @color3, // 66
+  @color5, // 67
+  @color6, // 68
+  @color6, // 69
+  @color5, // 70
+  @color5, // 71
+  @color6, // 72
+  @color1, // 73
+  @color3, // 74
+  @color4, // 75
+  @color2, // 76
+  @color5, // 77
+  @color6, // 78
+  @color2, // 79
+  @color1, // 80
+  @color3, // 81
+  @color6, // 82
+  @color5, // 83
+  @color4, // 84
+  @color3, // 85
+  @color4, // 86
+  @color1, // 87
+  @color2, // 88
+  @color8, // 89
+  @color2, // 90
+  @color1, // 91
+  @color9, // 92
+  @color9, // 93
+  @color4, // 94
+  @color3, // 95
+  @color8, // 96
+  @color8, // 97
+  @color1, // 98
+  @color4, // 99
+  @color8, // 100
+  @color9, // 101
+  @color3, // 102
+  @color2, // 103
+  @color9, // 104
+  @color8, // 105
+  @color2, // 106
+  @color10, // 107
+  @color1, // 108
+  @color1, // 109
+  @color11, // 110
+  @color9, // 111
+  @color9, // 112
+  @color8, // 113
+  @color9, // 114
+  @color12, // 115
+  @color4, // 116
+  @color2, // 117
+  @color3, // 118
+  @color8, // 119
+  @color8, // 120
+  @color11, // 121
+  @color4, // 122
+  @color2, // 123
+  @color12, // 124
+  @color3, // 125
+  @color9, // 126
+  @color9, // 127
+  @color8, // 128
+  @color8, // 129
+  @color2, // 130
+  @color1, // 131
+  @color11, // 132
+  @color11, // 133
+  @color12, // 134
+  @color12, // 135
+  @color4, // 136
+  @color11, // 137
+  @color9, // 138
+  @color3, // 139
+  @color2, // 140
+  @color11, // 141
+  @color12, // 142
+  @color1, // 143
+  @color9, // 144
+  @color9, // 145
+  @color2, // 146
+  @color11, // 147
+  @color11, // 148
+  @color12, // 149
+  @color9, // 150
+  @color12, // 151
+  @color8, // 152
+  @color8, // 153
+  @color12, // 154
+  @color8, // 155
+  @color8, // 156
+  @color13, // 157
+  @color12, // 158
+  @color13, // 159
+  ;
+
+
+@triangleStartColorList: 
+@initColor, // 0
+@initColor, // 1
+@initColor, // 2
+@initColor, // 3
+@initColor, // 4
+@initColor, // 5
+@initColor, // 6
+@initColor, // 7
+@initColor, // 8
+@initColor, // 9
+@initColor, // 10
+@initColor, // 11
+@initColor, // 12
+@initColor, // 13
+@initColor, // 14
+@initColor, // 15
+@initColor, // 16
+@initColor, // 17
+@initColor, // 18
+@initColor, // 19
+@initColor, // 20
+@initColor, // 21
+@initColor, // 22
+@initColor, // 23
+@initColor, // 24
+@initColor, // 25
+@initColor, // 26
+@initColor, // 27
+@initColor, // 28
+@initColor, // 29
+@initColor, // 30
+@initColor, // 31
+@initColor, // 32
+@initColor, // 33
+@initColor, // 34
+@initColor, // 35
+@initColor, // 36
+@initColor, // 37
+@initColor, // 38
+@initColor, // 39
+@initColor, // 40
+@initColor, // 41
+@initColor, // 42
+@initColor, // 43
+@initColor, // 44
+@initColor, // 45
+@initColor, // 46
+@initColor, // 47
+@initColor, // 48
+@initColor, // 49
+@initColor, // 50
+@initColor, // 51
+@initColor, // 52
+@initColor, // 53
+@initColor, // 54
+@initColor, // 55
+@initColor, // 56
+@initColor, // 57
+@initColor, // 58
+@initColor, // 59
+@initColor, // 60
+@initColor, // 61
+@initColor, // 62
+@initColor, // 63
+@initColor, // 64
+@initColor, // 65
+@initColor, // 66
+@initColor, // 67
+@initColor, // 68
+@initColor, // 69
+@initColor, // 70
+@initColor, // 71
+@initColor, // 72
+@initColor, // 73
+@initColor, // 74
+@initColor, // 75
+@initColor, // 76
+@initColor, // 77
+@initColor, // 78
+@initColor, // 79
+@initColor, // 80
+@initColor, // 81
+@initColor, // 82
+@initColor, // 83
+@initColor, // 84
+@initColor, // 85
+@initColor, // 86
+@initColor, // 87
+@initColor, // 88
+@initColor2, // 89
+@initColor, // 90
+@initColor, // 91
+@initColor2, // 92
+@initColor2, // 93
+@initColor, // 94
+@initColor, // 95
+@initColor2, // 96
+@initColor2, // 97
+@initColor, // 98
+@initColor, // 99
+@initColor2, // 100
+@initColor2, // 101
+@initColor, // 102
+@initColor, // 103
+@initColor2, // 104
+@initColor2, // 105
+@initColor, // 106
+@initColor2, // 107
+@initColor, // 108
+@initColor, // 109
+@initColor2, // 110
+@initColor2, // 111
+@initColor2, // 112
+@initColor2, // 113
+@initColor2, // 114
+@initColor2, // 115
+@initColor, // 116
+@initColor, // 117
+@initColor, // 118
+@initColor2, // 119
+@initColor2, // 120
+@initColor2, // 121
+@initColor, // 122
+@initColor, // 123
+@initColor2, // 124
+@initColor, // 125
+@initColor2, // 126
+@initColor2, // 127
+@initColor2, // 128
+@initColor2, // 129
+@initColor, // 130
+@initColor, // 131
+@initColor2, // 132
+@initColor2, // 133
+@initColor2, // 134
+@initColor2, // 135
+@initColor, // 136
+@initColor2, // 137
+@initColor2, // 138
+@initColor, // 139
+@initColor, // 140
+@initColor2, // 141
+@initColor2, // 142
+@initColor, // 143
+@initColor2, // 144
+@initColor2, // 145
+@initColor, // 146
+@initColor2, // 147
+@initColor2, // 148
+@initColor2, // 149
+@initColor2, // 150
+@initColor2, // 151
+@initColor2, // 152
+@initColor2, // 153
+@initColor2, // 154
+@initColor2, // 155
+@initColor2, // 156
+@initColor2, // 157
+@initColor2, // 158
+@initColor2, // 159
+;
+
+
+@triangleHighColorList: 
+@initHighColor, // 0
+@initHighColor, // 1
+@initHighColor, // 2
+@initHighColor, // 3
+@initHighColor, // 4
+@initHighColor, // 5
+@initHighColor, // 6
+@initHighColor, // 7
+@initHighColor, // 8
+@initHighColor, // 9
+@initHighColor, // 10
+@initHighColor, // 11
+@initHighColor, // 12
+@initHighColor, // 13
+@initHighColor, // 14
+@initHighColor, // 15
+@initHighColor, // 16
+@initHighColor, // 17
+@initHighColor, // 18
+@initHighColor, // 19
+@initHighColor, // 20
+@initHighColor, // 21
+@initHighColor, // 22
+@initHighColor, // 23
+@initHighColor, // 24
+@initHighColor, // 25
+@initHighColor, // 26
+@initHighColor, // 27
+@initHighColor, // 28
+@initHighColor, // 29
+@initHighColor, // 30
+@initHighColor, // 31
+@initHighColor, // 32
+@initHighColor, // 33
+@initHighColor, // 34
+@initHighColor, // 35
+@initHighColor, // 36
+@initHighColor, // 37
+@initHighColor, // 38
+@initHighColor, // 39
+@initHighColor, // 40
+@initHighColor, // 41
+@initHighColor, // 42
+@initHighColor, // 43
+@initHighColor, // 44
+@initHighColor, // 45
+@initHighColor, // 46
+@initHighColor, // 47
+@initHighColor, // 48
+@initHighColor, // 49
+@initHighColor, // 50
+@initHighColor, // 51
+@initHighColor, // 52
+@initHighColor, // 53
+@initHighColor, // 54
+@initHighColor, // 55
+@initHighColor, // 56
+@initHighColor, // 57
+@initHighColor, // 58
+@initHighColor, // 59
+@initHighColor, // 60
+@initHighColor, // 61
+@initHighColor, // 62
+@initHighColor, // 63
+@initHighColor, // 64
+@initHighColor, // 65
+@initHighColor, // 66
+@initHighColor, // 67
+@initHighColor, // 68
+@initHighColor, // 69
+@initHighColor, // 70
+@initHighColor, // 71
+@initHighColor, // 72
+@initHighColor, // 73
+@initHighColor, // 74
+@initHighColor, // 75
+@initHighColor, // 76
+@initHighColor, // 77
+@initHighColor, // 78
+@initHighColor, // 79
+@initHighColor, // 80
+@initHighColor, // 81
+@initHighColor, // 82
+@initHighColor, // 83
+@initHighColor, // 84
+@initHighColor, // 85
+@initHighColor, // 86
+@initHighColor, // 87
+@initHighColor, // 88
+@initHighColor2, // 89
+@initHighColor, // 90
+@initHighColor, // 91
+@initHighColor2, // 92
+@initHighColor2, // 93
+@initHighColor, // 94
+@initHighColor, // 95
+@initHighColor2, // 96
+@initHighColor2, // 97
+@initHighColor, // 98
+@initHighColor, // 99
+@initHighColor2, // 100
+@initHighColor2, // 101
+@initHighColor, // 102
+@initHighColor, // 103
+@initHighColor2, // 104
+@initHighColor2, // 105
+@initHighColor, // 106
+@initHighColor2, // 107
+@initHighColor, // 108
+@initHighColor, // 109
+@initHighColor2, // 110
+@initHighColor2, // 111
+@initHighColor2, // 112
+@initHighColor2, // 113
+@initHighColor2, // 114
+@initHighColor2, // 115
+@initHighColor, // 116
+@initHighColor, // 117
+@initHighColor, // 118
+@initHighColor2, // 119
+@initHighColor2, // 120
+@initHighColor2, // 121
+@initHighColor, // 122
+@initHighColor, // 123
+@initHighColor2, // 124
+@initHighColor, // 125
+@initHighColor2, // 126
+@initHighColor2, // 127
+@initHighColor2, // 128
+@initHighColor2, // 129
+@initHighColor, // 130
+@initHighColor, // 131
+@initHighColor2, // 132
+@initHighColor2, // 133
+@initHighColor2, // 134
+@initHighColor2, // 135
+@initHighColor, // 136
+@initHighColor2, // 137
+@initHighColor2, // 138
+@initHighColor, // 139
+@initHighColor, // 140
+@initHighColor2, // 141
+@initHighColor2, // 142
+@initHighColor, // 143
+@initHighColor2, // 144
+@initHighColor2, // 145
+@initHighColor, // 146
+@initHighColor2, // 147
+@initHighColor2, // 148
+@initHighColor2, // 149
+@initHighColor2, // 150
+@initHighColor2, // 151
+@initHighColor2, // 152
+@initHighColor2, // 153
+@initHighColor2, // 154
+@initHighColor2, // 155
+@initHighColor2, // 156
+@initHighColor2, // 157
+@initHighColor2, // 158
+@initHighColor2, // 159
+;

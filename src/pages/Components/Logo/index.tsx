@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
+import { Button } from 'antd';
 import classnames from 'classnames';
 import styles from './index.module.less';
 
@@ -187,6 +188,7 @@ const triangles = points.map((d, i) => {
 })
 
 function Logo() {
+  const [middleToggle, setMiddleToggle] = useState(false);
   const circle = useMemo(() => {
     const a = points.map((d) => {
       if (!d) {
@@ -229,6 +231,10 @@ function Logo() {
     return { vertexPoints: Array.from(vs.values()), centerPoints: centerPoint };
   }, [])
 
+  const onClick = () => {
+    setMiddleToggle(true);
+  }
+
   return (
     <div className={styles.logo}>
       {/* <div className={styles.logo_bg}></div> */}
@@ -236,12 +242,16 @@ function Logo() {
         triangles.map((d, i) => (
           <div 
             key={`${d?.clipPath + i}`} 
-            className={classnames(styles.logo_triangle, styles[`logo_triangle-${i + 1}`])} 
+            className={classnames({
+              [styles.logo_triangle]: true,
+              [styles[`logo_triangle-${i + 1}`]]: true,
+              [styles[`logo_middle-${i + 1}`]]: middleToggle,
+            })} 
             style={d}
           />
         ))
       }
-      <svg style={{ width: 1920, height: 1080, position: 'absolute' }}>
+      {/* <svg style={{ width: 1920, height: 1080, position: 'absolute' }}> */}
         {/* 三角形中心点 */}
         {/* {
           circle.centerPoints.map((d: any, i: number) => {
@@ -278,7 +288,9 @@ function Logo() {
             )
           })
         } */}
-      </svg>
+      {/* </svg> */}
+      {/* 触发变化 */}
+      <Button onClick={onClick}>变换</Button>
     </div>
   );
 }
