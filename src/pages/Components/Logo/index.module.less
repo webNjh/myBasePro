@@ -1,5 +1,7 @@
 @initColor: #00B4ED;
-@initHighColor: #cff4ff;
+@initColor2: #67B42B;
+@initHighColor: #a3ebff;
+@initHighColor2: #d9ffbc;
 
 @color1: #0094D5;
 @color2: #009FE8;
@@ -217,15 +219,15 @@
 
   .loop(@n, @i: 1) when(@i <= @n) {
     @currentColor: extract(@triangleColorList,@i);
-    @delay: @i * 0.1s;
-    @name: "@{i}";
+    @delay: @i * 0.02s;
+    @name: ~"in@{i}";
 
-    .logo_triangle-@{i} {
+    .logo_triangle-@{i} when not (@i = 90) {
       .keyframesFunction(@name, {
         0% {
           background-color: @initColor;
         }
-        40% {
+        35% {
           background-color: @initColor;
         }
         50% {
@@ -239,6 +241,28 @@
         }
       });
       // background-color: @initColor;
+      animation: @name 5s ease-in-out @delay;
+      animation-fill-mode: forwards;
+    }
+
+    .logo_triangle-@{i} when (@i = 90) and (@i = 93) {
+      .keyframesFunction(@name, {
+        0% {
+          background-color: @initColor2;
+        }
+        35% {
+          background-color: @initColor2;
+        }
+        50% {
+          background-color: @initHighColor2;
+        }
+        60% {
+          background-color: @currentColor;
+        }
+        100% {
+          background-color: @currentColor;
+        }
+      });
       animation: @name 5s ease-in-out @delay;
       animation-fill-mode: forwards;
     }
