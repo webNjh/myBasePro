@@ -3,7 +3,6 @@ import { Button } from 'antd';
 import classnames from 'classnames';
 import styles from './index.module.less';
 
-// , background: 'red'
 const points = [
   '40.22% 62.75%, 40.66% 61.98%, 41.00% 64.78%', // 0
   '41% 64.78%, 42.11% 64.40%, 42.62% 67.2%', // 1
@@ -167,6 +166,54 @@ const points = [
   '58.95% 35.08%, 59.9% 37.73%, 59.27% 39.77%', // 159
 ];
 
+function generateRandomNumber() {
+  var randomNumber = Math.random() * 20;
+  return randomNumber.toFixed(2);
+}
+
+function toFixed2(num: number) {
+  return Math.round(num * 100) / 100;
+}
+
+// 变换后的坐标
+const transformPoints = points.map(d => {
+  // 中心点
+  const center = d.split(',').reduce((acc, cur) => {
+    const [x, y] = cur.split('%');
+    acc.x += Number(x);
+    acc.y += Number(y);
+    return acc;
+  } , { x: 0, y: 0 });
+  center.x /= 3;
+  center.y /= 3;
+
+  const diffRandom = generateRandomNumber();
+  // const randomBool = Math.random() > 0.5;
+  
+  center.x = toFixed2(Math.random() > 0.5 ? center.x + Number(diffRandom) : center.x - Number(diffRandom))
+  center.y = toFixed2(Math.random() > 0.5 ? center.y + Number(diffRandom) : center.y - Number(diffRandom))
+
+  // 输出x之间的最大差值和y之间的最大差值
+  const xDiff: any = d.split(',').reduce((acc, cur) => {
+    const [x, y] = cur.split('%');
+    acc.x.push(Number(x));
+    acc.y.push(Number(y));
+    return acc;
+  } , { x: [], y: [] });
+  xDiff.x = toFixed2(Math.max(...xDiff.x) - Math.min(...xDiff.x));
+  xDiff.y = toFixed2(Math.max(...xDiff.y) - Math.min(...xDiff.y));
+
+  // 用中心点坐标随机加减xDiff范围内的值计算新的坐标
+  const newPoints = d.split(',').map(cur => {
+    // const [x, y] = cur.split('%');
+    const newX = toFixed2(Math.random() > 0.5 ? Number(center.x) + (Math.random() * xDiff.x) : Number(center.x) - (Math.random() * xDiff.x));
+    const newY = toFixed2(Math.random() > 0.5 ? Number(center.y) + (Math.random() * xDiff.y) : Number(center.y) - (Math.random() * xDiff.y));
+    return `${newX}% ${newY}%`
+  }).join(',');
+
+  return newPoints
+});
+
 const greenIndex = [
   89, 92, 93, 96, 97, 100, 101, 104, 105, 107, 110, 111, 112, 113, 114, 115, 119, 120, 121, 124, 126, 127,
   128, 129, 132, 133, 134, 135, 137, 138, 141, 142, 144, 145, 147, 148, 149, 150, 151, 152, 153, 154, 155,
@@ -186,6 +233,20 @@ const triangles = points.map((d, i) => {
     clipPath: `polygon(${d})`,
   }
 })
+
+const transformTriangles = transformPoints.map((d) => {
+  if (!d) {
+    return {}
+  }
+  return {
+    clipPath: `polygon(${d})`,
+  }
+})
+
+const delays = transformPoints.map(d => {
+  return Math.floor(Math.random() * 101) - 50;
+})
+console.log('delays', delays)
 
 function Logo() {
   const [middleToggle, setMiddleToggle] = useState(false);
@@ -236,22 +297,32 @@ function Logo() {
   }
 
   return (
-    <div className={styles.logo}>
+    <div className={classnames({
+      [styles.logo]: true,
+      [styles.logo_animation]: middleToggle,
+    })}>
       {/* <div className={styles.logo_bg}></div> */}
       {
-        triangles.map((d, i) => (
-          <div 
-            key={`${d?.clipPath + i}`} 
-            className={classnames({
-              [styles.logo_triangle]: true,
-              [styles[`logo_triangle-${i + 1}`]]: true,
-              [styles[`logo_middle-${i + 1}`]]: middleToggle,
-            })} 
-            style={d}
-          />
-        ))
+        triangles.map((d, i) => {
+          const style = middleToggle ? {
+            ...d, 
+            ...transformTriangles[i] 
+          } : d;
+
+          return (
+            <div 
+              key={`${d?.clipPath + i}`} 
+              className={classnames({
+                [styles.logo_triangle]: true,
+                [styles[`logo_triangle-${i + 1}`]]: true,
+                // [styles[`logo_middle-${i + 1}`]]: middleToggle,
+              })} 
+              style={style}
+            />
+          )
+        })
       }
-      {/* <svg style={{ width: 1920, height: 1080, position: 'absolute' }}> */}
+      <svg style={{ width: 1920, height: 1080, position: 'absolute' }}>
         {/* 三角形中心点 */}
         {/* {
           circle.centerPoints.map((d: any, i: number) => {
@@ -288,7 +359,7 @@ function Logo() {
             )
           })
         } */}
-      {/* </svg> */}
+      </svg>
       {/* 触发变化 */}
       <Button onClick={onClick}>变换</Button>
     </div>

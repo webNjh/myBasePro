@@ -1,5 +1,14 @@
 @import "common.less";
 
+@keyframes logoTriangleAnimation {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
 .keyframesFunction (@name,@content) {
   @keyframes @name{
     @content();
@@ -15,10 +24,15 @@
   height: 1080px;
 }
 
+.logo_animation {
+  animation: logoTriangleAnimation 20s linear infinite;
+}
 .logo {
   position: relative;
   width: 100%;
   height: 100%;
+  // perspective: 1000px;
+  // transform-style: preserve-3d;
   .logo_bg {
     position: absolute;
     top: 0;
@@ -32,7 +46,7 @@
   .logo_triangle {
     .baseLogoTriangle;
     background-color: @initColorBlue;
-    transition: all .3s ease-in-out;
+    transition: all 3s ease-out;
     // animation: identifier 5s ease-in-out;
     // animation-fill-mode: forwards;
   }
@@ -62,11 +76,10 @@
       }
     });
 
-    @transformDelay: (@i * 0.01s) + 5;
-    @transform: ~"transform@{i}";
+    @middleDelay: (@i * 0.01s) + 5;
+    @middleHighLight: ~"middleHighLight@{i}";
 
-
-    .keyframesFunction(@transform, {
+    .keyframesFunction(@middleHighLight, {
       0% {
         background-color: @currentColor;
       }
@@ -84,23 +97,42 @@
       }
     });
 
-    @middle: ~"middle@{i}";
-
     .logo_triangle-@{i} {
-      animation: @start 3s ease-in-out @delay, @transform 10s ease @transformDelay infinite;
+      animation: @start 3s ease-in-out @delay, @middleHighLight 10s ease @middleDelay infinite;
       animation-fill-mode: forwards;
     }
 
-    .logo_middle-@{i} when (@i = 1){
-      .keyframesFunction(@middle, {
-        0% {
-          clip-path: polygon(40.22% 62.75%, 40.66% 61.98%, 41.00% 64.78%);
-        }
-        100% {
-          clip-path: polygon(22.22% 86.75%, 25.66% 84.98%, 25% 88.78%);
-        }
-      });
-      animation: @middle 2s ease @delay;
+    @transformName: ~"transformName@{i}";
+    @logoPosition: extract(@logoPositionList,@i);
+    @transformPosition: extract(@transformPositionList,@i);
+    @transformDelay: extract(@transformDelayList,@i);
+    @translateZ: extract(@translateZList,@i);
+
+
+    .keyframesFunction(@transformName, {
+      0% {
+        clip-path: @logoPosition;
+        // transform: translateZ(0px);
+      }
+      100% {        
+        clip-path: @transformPosition;
+        // transform: @translateZ;
+      }
+    });
+
+    @transformEndName: ~"transformEndName@{i}";
+
+    // .keyframesFunction(@transformEndName, {
+    //   0% {
+    //     clip-path: @logoPosition;
+    //   }
+    //   100% {        
+    //     clip-path: @transformPosition;
+    //   }
+    // });
+
+    .logo_transform-@{i} {
+      animation: @transformName 3s ease-in-out;
       animation-fill-mode: forwards;
     }
 
