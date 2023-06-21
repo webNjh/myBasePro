@@ -25,7 +25,7 @@
 }
 
 .logo_animation {
-  animation: logoTriangleAnimation 20s linear infinite;
+  animation: logoTriangleAnimation 720s linear infinite;
 }
 .logo {
   position: relative;
@@ -39,14 +39,14 @@
     left: 0;
     width: 100%;
     height: 100%;
-    // background: url('@/assets/svg/logo.svg') no-repeat center center;
-    // background-size: 400px 400px;
-    // opacity: 0.6;
+    background: url('@/assets/svg/lion.svg') no-repeat center center;
+    background-size: 400px 400px;
+    opacity: 0.8;
   }
   .logo_triangle {
     .baseLogoTriangle;
     background-color: @initColorBlue;
-    transition: all 3s ease-out;
+    // transition: all 3s ease-out;
     // animation: identifier 5s ease-in-out;
     // animation-fill-mode: forwards;
   }
@@ -58,6 +58,7 @@
     @delay: @i * 0.03s;
     @start: ~"start@{i}";
 
+    // 初始化变色
     .keyframesFunction(@start, {
       0% {
         background-color: @startColor;
@@ -79,6 +80,7 @@
     @middleDelay: (@i * 0.01s) + 5;
     @middleHighLight: ~"middleHighLight@{i}";
 
+    // 扫光
     .keyframesFunction(@middleHighLight, {
       0% {
         background-color: @currentColor;
@@ -109,6 +111,7 @@
     @translateZ: extract(@translateZList,@i);
 
 
+    // 爆炸
     .keyframesFunction(@transformName, {
       0% {
         clip-path: @logoPosition;
@@ -120,19 +123,19 @@
       }
     });
 
-    @transformEndName: ~"transformEndName@{i}";
+    // @transformEndName: ~"transformEndName@{i}";
 
     // .keyframesFunction(@transformEndName, {
     //   0% {
-    //     clip-path: @logoPosition;
+    //     transform: rotateX(0deg) rotateY(0deg);
     //   }
     //   100% {        
-    //     clip-path: @transformPosition;
+    //     transform: rotateX(360deg) rotateY(360deg);
     //   }
     // });
 
     .logo_transform-@{i} {
-      animation: @transformName 3s ease-in-out;
+      animation: @transformName 3s ease-in-out, @middleHighLight 10s ease @middleDelay infinite;
       animation-fill-mode: forwards;
     }
 
