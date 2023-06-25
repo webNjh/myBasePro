@@ -78,6 +78,7 @@ const lionTriangles = lionPoints.map((d, i) => {
   }
   return {
     clipPath: `polygon(${d})`,
+    backgroundColor: '#00B4ED', 
   }
 })
 
