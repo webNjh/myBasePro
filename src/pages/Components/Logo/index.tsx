@@ -156,7 +156,7 @@ function Logo() {
       })}>
         {/* <div className={styles.logo_bg}></div> */}
         {/* logo */}
-        {
+        {/* {
           !lionToggle ? 
           triangles.map((d, i) => (
             <div 
@@ -174,11 +174,19 @@ function Logo() {
           lionTriangles.map((d, i) => (
             <div
               key={`${d?.clipPath + i}`} 
+              className={classnames({
+                [styles.lion_triangle]: true,
+                // [styles[`logo_triangle-${i + 1}`]]: true,
+                // [styles[`logo_transform-${i + 1}`]]: middleToggle,
+                // [styles[`logo_lion-${i + 1}`]]: lionToggle,
+                // [styles[`logo_middle-${i + 1}`]]: middleToggle,
+              })} 
+              style={d}
             />
           ))
-        }
+        } */}
         {/* 小狮子 */}
-        {/* {
+        {
           lionTriangles.map((d, i) => (
             <div 
               key={`${d?.clipPath + i}`} 
@@ -191,10 +199,10 @@ function Logo() {
               style={d}
             />
           ))
-        } */}
+        }
         <svg style={{ width: 1920, height: 1080, position: 'absolute' }}>
           {/* 三角形中心点 */}
-          {/* {
+          {
             circle(lionPoints).centerPoints.map((d: any, i: number) => {
               if (d) {
                 return (
@@ -210,7 +218,7 @@ function Logo() {
                 )
               } return null;
             })
-          } */}
+          }
           {/* 三角形顶点 */}
           {/* {
             circle(lionPoints).vertexPoints.map((d: any, i: number) => {

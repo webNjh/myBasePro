@@ -50,6 +50,16 @@
     // animation: identifier 5s ease-in-out;
     // animation-fill-mode: forwards;
   }
+  .lion_triangle {
+    .baseLogoTriangle;
+  }
+
+  .lionLoop(@n, @i: 1) when(@i <= @n) {
+    // 初始化离散的三角形颜色
+    @startTriangleColor: extract(@triangleColorList, @i);
+    // 小狮子颜色
+    // @lionTriangleColor: 
+  }
 
   .loop(@n, @i: 1) when(@i <= @n) {
     @currentColor: extract(@triangleColorList,@i);
