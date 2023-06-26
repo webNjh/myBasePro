@@ -138,88 +138,103 @@ const delays = transformPoints.map(d => {
 
 function Logo() {
   const [middleToggle, setMiddleToggle] = useState(false);
+  const [lionToggle, setLionToggle] = useState(false);
   
   const onClick = () => {
     setMiddleToggle(true);
   }
 
+  const onTransformLion = () => {
+    setLionToggle(true);
+  }
+
   return (
-    <div className={classnames({
-      [styles.logo]: true,
-      [styles.logo_animation]: middleToggle,
-    })}>
-      <div className={styles.logo_bg}></div>
-      {/* logo */}
-      {/* {
-        triangles.map((d, i) => (
-          <div 
-            key={`${d?.clipPath + i}`} 
-            className={classnames({
-              [styles.logo_triangle]: true,
-              [styles[`logo_triangle-${i + 1}`]]: true,
-              [styles[`logo_transform-${i + 1}`]]: middleToggle,
-              // [styles[`logo_middle-${i + 1}`]]: middleToggle,
-            })} 
-            style={d}
-          />
-        ))
-      } */}
-      {/* 小狮子 */}
-      {
-        lionTriangles.map((d, i) => (
-          <div 
-            key={`${d?.clipPath + i}`} 
-            className={classnames({
-              [styles.logo_triangle]: true,
-              // [styles[`logo_triangle-${i + 1}`]]: true,
-              // [styles[`logo_transform-${i + 1}`]]: middleToggle,
-              // [styles[`logo_middle-${i + 1}`]]: middleToggle,
-            })} 
-            style={d}
-          />
-        ))
-      }
-      <svg style={{ width: 1920, height: 1080, position: 'absolute' }}>
-        {/* 三角形中心点 */}
+    <>
+      <div className={classnames({
+        [styles.logo]: true,
+        // [styles.logo_animation]: middleToggle,
+      })}>
+        {/* <div className={styles.logo_bg}></div> */}
+        {/* logo */}
         {
-          circle(lionPoints).centerPoints.map((d: any, i: number) => {
-            if (d) {
+          !lionToggle ? 
+          triangles.map((d, i) => (
+            <div 
+              key={`${d?.clipPath + i}`} 
+              className={classnames({
+                [styles.logo_triangle]: true,
+                [styles[`logo_triangle-${i + 1}`]]: true,
+                [styles[`logo_transform-${i + 1}`]]: middleToggle,
+                [styles[`logo_lion-${i + 1}`]]: lionToggle,
+                // [styles[`logo_middle-${i + 1}`]]: middleToggle,
+              })} 
+              style={d}
+            />
+          )) : 
+          lionTriangles.map((d, i) => (
+            <div
+              key={`${d?.clipPath + i}`} 
+            />
+          ))
+        }
+        {/* 小狮子 */}
+        {/* {
+          lionTriangles.map((d, i) => (
+            <div 
+              key={`${d?.clipPath + i}`} 
+              className={classnames({
+                [styles.logo_triangle]: true,
+                // [styles[`logo_triangle-${i + 1}`]]: true,
+                // [styles[`logo_transform-${i + 1}`]]: middleToggle,
+                // [styles[`logo_middle-${i + 1}`]]: middleToggle,
+              })} 
+              style={d}
+            />
+          ))
+        } */}
+        <svg style={{ width: 1920, height: 1080, position: 'absolute' }}>
+          {/* 三角形中心点 */}
+          {/* {
+            circle(lionPoints).centerPoints.map((d: any, i: number) => {
+              if (d) {
+                return (
+                  <text 
+                    key={`${d + i}`}
+                    x={d.x / 100 * 1920}
+                    y={d.y / 100 * 1080}
+                    fill="white"
+                    fontSize="2"
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                  >{i}</text>
+                )
+              } return null;
+            })
+          } */}
+          {/* 三角形顶点 */}
+          {/* {
+            circle(lionPoints).vertexPoints.map((d: any, i: number) => {
               return (
-                <text 
-                  key={`${d + i}`}
-                  x={d.x / 100 * 1920}
-                  y={d.y / 100 * 1080}
-                  fill="white"
-                  fontSize="2"
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                >{i}</text>
+                <circle 
+                  key={`${d + i}`} 
+                  r={1} 
+                  cx={parseFloat(d[0]) / 100 * 1920} 
+                  cy={parseFloat(d[1]) / 100 * 1080} 
+                  fill="green" 
+                  fillOpacity={0.6} 
+                  stroke="none"
+                  onMouseEnter={() => { console.log(`${d[0]} ${d[1]}`) }}
+                  onMouseLeave={() => { console.log('出去了') }}
+                />
               )
-            } return null;
-          })
-        }
-        {/* 三角形顶点 */}
-        {
-          circle(lionPoints).vertexPoints.map((d: any, i: number) => {
-            return (
-              <circle 
-                key={`${d + i}`} 
-                r={1} 
-                cx={parseFloat(d[0]) / 100 * 1920} 
-                cy={parseFloat(d[1]) / 100 * 1080} 
-                fill="green" 
-                fillOpacity={0.6} 
-                stroke="none"
-                onMouseEnter={() => { console.log(`${d[0]} ${d[1]}`) }}
-                onMouseLeave={() => { console.log('出去了') }}
-              />
-            )
-          })
-        }
-      </svg>
+            })
+          } */}
+        </svg>
+      </div>
       {/* 触发变化 */}
       <Button onClick={onClick}>变换</Button>
-    </div>
+      <Button onClick={onTransformLion}>变狮子</Button>
+    </>
   );
 }
 
