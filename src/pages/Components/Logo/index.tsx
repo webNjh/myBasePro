@@ -76,9 +76,10 @@ const lionTriangles = lionPoints.map((d, i) => {
   if (!d) {
     return {}
   }
+
   return {
     clipPath: `polygon(${d})`,
-    backgroundColor: '#00B4ED', 
+    // backgroundColor: '#00B4ED', 
   }
 })
 
@@ -137,36 +138,40 @@ const delays = transformPoints.map(d => {
 })
 
 function Logo() {
+  const [start, setStart] = useState(false);
   const [middleToggle, setMiddleToggle] = useState(false);
   const [lionToggle, setLionToggle] = useState(false);
+  const [typeToggle, setTypeToggle] = useState('logo');
   
   const onClick = () => {
-    setMiddleToggle(true);
-  }
+    setStart(true);
 
-  const onTransformLion = () => {
-    setLionToggle(true);
+    setTimeout(() => {
+      setMiddleToggle(true);
+    }, 15000)
+
+    setTimeout(() => {
+      setLionToggle(true);
+      setTypeToggle('lion')
+    }, 23000)
   }
 
   return (
-    <>
+    <div className={styles.logo} style={{ position: 'relative', width: '100%', height: '100%', background: typeToggle === 'logo' ? '#63C5AB' : '#FEAED4', transition: 'background 2s linear' }}>
       <div className={classnames({
-        [styles.logo]: true,
-        // [styles.logo_animation]: middleToggle,
+        [styles.logo_content]: true,
       })}>
         {/* <div className={styles.logo_bg}></div> */}
         {/* logo */}
-        {/* {
+        {
           !lionToggle ? 
           triangles.map((d, i) => (
             <div 
               key={`${d?.clipPath + i}`} 
               className={classnames({
                 [styles.logo_triangle]: true,
-                [styles[`logo_triangle-${i + 1}`]]: true,
+                [styles[`logo_triangle-${i + 1}`]]: start,
                 [styles[`logo_transform-${i + 1}`]]: middleToggle,
-                [styles[`logo_lion-${i + 1}`]]: lionToggle,
-                // [styles[`logo_middle-${i + 1}`]]: middleToggle,
               })} 
               style={d}
             />
@@ -176,17 +181,21 @@ function Logo() {
               key={`${d?.clipPath + i}`} 
               className={classnames({
                 [styles.lion_triangle]: true,
-                // [styles[`logo_triangle-${i + 1}`]]: true,
-                // [styles[`logo_transform-${i + 1}`]]: middleToggle,
-                // [styles[`logo_lion-${i + 1}`]]: lionToggle,
-                // [styles[`logo_middle-${i + 1}`]]: middleToggle,
+                [styles[`lion_triangle-${i + 1}`]]: true,
+                [styles[`lion_transform-${i + 1}`]]: lionToggle,
+                [styles['lion_transformEye-238']]: lionToggle && i === 237,
+                [styles['lion_transformEye-242']]: lionToggle && i === 241,
+                [styles['lion_transformEye-243']]: lionToggle && i === 242,
+                [styles['lion_transformEye-239']]: lionToggle && i === 238,
+                [styles['lion_transformEye-245']]: lionToggle && i === 244,
+                [styles['lion_transformEye-246']]: lionToggle && i === 245,
               })} 
               style={d}
             />
           ))
-        } */}
+        }
         {/* 小狮子 */}
-        {
+        {/* {
           lionTriangles.map((d, i) => (
             <div 
               key={`${d?.clipPath + i}`} 
@@ -199,11 +208,11 @@ function Logo() {
               style={d}
             />
           ))
-        }
-        <svg style={{ width: 1920, height: 1080, position: 'absolute' }}>
+        } */}
+        {/* <svg style={{ width: 1920, height: 1080, position: 'absolute' }}> */}
           {/* 三角形中心点 */}
-          {
-            circle(lionPoints).centerPoints.map((d: any, i: number) => {
+          {/* {
+            circle(lionPoints2).centerPoints.map((d: any, i: number) => {
               if (d) {
                 return (
                   <text 
@@ -218,10 +227,10 @@ function Logo() {
                 )
               } return null;
             })
-          }
+          } */}
           {/* 三角形顶点 */}
           {/* {
-            circle(lionPoints).vertexPoints.map((d: any, i: number) => {
+            circle(lionPoints2).vertexPoints.map((d: any, i: number) => {
               return (
                 <circle 
                   key={`${d + i}`} 
@@ -237,12 +246,20 @@ function Logo() {
               )
             })
           } */}
-        </svg>
+        {/* </svg> */}
       </div>
       {/* 触发变化 */}
       <Button onClick={onClick}>变换</Button>
-      <Button onClick={onTransformLion}>变狮子</Button>
-    </>
+      <div
+        style={{ 
+          position: 'absolute', 
+          left: '50%', 
+          bottom: '20%', 
+          transform: 'translate(-50%, 0)', 
+          color: '#fff',
+          fontSize: 40,
+        }}>{typeToggle === 'logo' ? 'Dt Dream' : 'Dt Lion'}</div>
+    </div>
   );
 }
 

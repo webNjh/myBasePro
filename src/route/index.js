@@ -12,7 +12,7 @@ import Logo from '@/pages/Components/Logo';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to="/navbar" /> // <-- redirect
+    element: <Navigate to="/logo" /> // <-- redirect
   },
   {
     path: '/navbar',
